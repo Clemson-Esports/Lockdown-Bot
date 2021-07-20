@@ -37,6 +37,9 @@ public class EndLockdownCommand implements Command{
 	@Override
 	public void run() {
 		getInfo();
+		if(!guild.getMember(user).hasPermission(Permission.MANAGE_ROLES)) {
+			return;
+		}
 		for(PermissionsSave i : Driver.permSaves) {
 			if(guild.getMember(jda.getSelfUser()).canInteract(i.role))
 				i.role.getManager().givePermissions(i.perms).queue();
