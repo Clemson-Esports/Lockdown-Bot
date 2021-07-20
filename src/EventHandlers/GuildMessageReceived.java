@@ -13,6 +13,8 @@ public class GuildMessageReceived {
 	private static ArrayList<Command> commands = new ArrayList<Command>();
 
 	public GuildMessageReceived(GuildMessageReceivedEvent event) {
+		//Requirements: 
+		//MANAGE_ROLES permission
 		
 		//string version of message
 		String msg = event.getMessage().getContentDisplay();
@@ -28,8 +30,10 @@ public class GuildMessageReceived {
 		
 		//add all bot commands to commands list
 		LockdownCommand lockdownCommand = new LockdownCommand(event);
+		//no knew perms
 		commands.add(lockdownCommand);
 		EndLockdownCommand endLockdownCommand = new EndLockdownCommand(event);
+		//no new perms
 		commands.add(endLockdownCommand);
 		
 		//check message

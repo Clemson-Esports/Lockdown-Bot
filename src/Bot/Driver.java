@@ -21,8 +21,7 @@ public class Driver extends ListenerAdapter{
 	public static String location = 
 			System.getProperty("user.dir").equals("D:\\Eclipse Upgrade\\workspace\\Lockdown Bot")
 			? "D:\\Eclipse Upgrade\\Lockdown Bot\\" : "";
-	public static String version = "1.1.0";
-	public static String guildID = "215845807801237514"; //clemson id: 215845807801237514
+	public static String version = "1.1.1";
 	public static ArrayList<PermissionsSave> permSaves = new ArrayList<PermissionsSave>();
 
 	public static void main(String[] args) {
@@ -86,7 +85,7 @@ public class Driver extends ListenerAdapter{
 					tmpPerm.add(Permission.valueOf(tmp));
 					tmp = scnr.nextLine();
 				}
-				permSaves.add(new PermissionsSave(tmpPerm,jdaMaker.getJda().getGuildById(guildID).getRoleById(role)));
+				permSaves.add(new PermissionsSave(tmpPerm,jdaMaker.getJda().getRoleById(role)));
 			}
 			scnr.close();
 		} catch (FileNotFoundException e) {
