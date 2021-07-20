@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Bot.*;
 import MessageCommands.*;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import Interfaces.Command;
 
@@ -18,6 +19,10 @@ public class GuildMessageReceived {
 		
 		//checks if this is an attepted command
 		if(!Driver.prefix.matcher(msg).find()) {
+			return;
+		}
+		//has perms
+		if(!event.getMember().hasPermission(Permission.MANAGE_ROLES)) {
 			return;
 		}
 		

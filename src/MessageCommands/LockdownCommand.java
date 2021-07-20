@@ -37,9 +37,6 @@ public class LockdownCommand implements Interfaces.Command{
 	@Override
 	public void run() {
 		getInfo();
-		if(!guild.getMember(user).hasPermission(Permission.MANAGE_ROLES)) {
-			return;
-		}
 		//check if user is mentioned
 		ArrayList<Role> lockdownRoles = new ArrayList<Role>(message.getMentionedRoles());
 		if(lockdownRoles.size() <= 0) {

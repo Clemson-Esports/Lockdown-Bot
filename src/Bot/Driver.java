@@ -21,7 +21,7 @@ public class Driver extends ListenerAdapter{
 	public static String location = 
 			System.getProperty("user.dir").equals("D:\\Eclipse Upgrade\\workspace\\Lockdown Bot")
 			? "D:\\Eclipse Upgrade\\Lockdown Bot\\" : "";
-	public static String version = "1.0.0";
+	public static String version = "1.1.0";
 	public static String guildID = "215845807801237514"; //clemson id: 215845807801237514
 	public static ArrayList<PermissionsSave> permSaves = new ArrayList<PermissionsSave>();
 
