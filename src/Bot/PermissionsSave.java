@@ -10,8 +10,6 @@ public class PermissionsSave {
 	public List<Permission> perms;
 	public Role role;
 	
-	private PermissionsSave() {}
-	
 	public PermissionsSave(List<Permission> perms, Role role) {
 		this.perms = perms;
 		this.role = role;
