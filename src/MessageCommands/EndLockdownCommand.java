@@ -38,8 +38,13 @@ public class EndLockdownCommand implements Command{
 	public void run() {
 		getInfo();
 		for(PermissionsSave i : Driver.permSaves) {
-			if(guild.getMember(jda.getSelfUser()).canInteract(i.role))
-				i.role.getManager().givePermissions(i.perms).queue();
+			try {
+				if(guild.getMember(jda.getSelfUser()).canInteract(guild.getRoleById(i.role.getId())))
+					i.role.getManager().givePermissions(i.perms).queue();
+			}catch(IllegalArgumentException e) {
+				channel.sendMessage("The lockdown was not started in this guild").queue();
+				e.printStackTrace();
+			}
 		}
 		Driver.permSaves = new ArrayList<PermissionsSave>();
 		savePerms();

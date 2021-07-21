@@ -21,7 +21,7 @@ public class Driver extends ListenerAdapter{
 	public static String location = 
 			System.getProperty("user.dir").equals("D:\\Eclipse Upgrade\\workspace\\Lockdown Bot")
 			? "D:\\Eclipse Upgrade\\Lockdown Bot\\" : "";
-	public static String version = "1.1.1";
+	public static String version = "1.1.3";
 	public static ArrayList<PermissionsSave> permSaves = new ArrayList<PermissionsSave>();
 
 	public static void main(String[] args) {
@@ -82,8 +82,13 @@ public class Driver extends ListenerAdapter{
 				ArrayList<Permission> tmpPerm = new ArrayList<Permission>();
 				String tmp = scnr.nextLine();
 				while(!tmp.startsWith("-")) {
-					tmpPerm.add(Permission.valueOf(tmp));
-					tmp = scnr.nextLine();
+					try {
+						tmpPerm.add(Permission.valueOf(tmp));
+						tmp = scnr.nextLine();
+					}catch(IllegalArgumentException e) {
+						scnr.close();
+						return true;
+					}
 				}
 				permSaves.add(new PermissionsSave(tmpPerm,jdaMaker.getJda().getRoleById(role)));
 			}
