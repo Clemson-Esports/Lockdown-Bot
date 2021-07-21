@@ -20,7 +20,7 @@ public class GuildMessageReceived {
 		String msg = event.getMessage().getContentDisplay();
 		
 		//checks if this is an attepted command
-		if(!Driver.prefix.matcher(msg).find()) {
+		if(!Driver.prefix.matcher(msg).find() && event.getMessage().getAttachments().size() == 0) {
 			return;
 		}
 		//has perms
@@ -35,12 +35,17 @@ public class GuildMessageReceived {
 		EndLockdownCommand endLockdownCommand = new EndLockdownCommand(event);
 		//no new perms
 		commands.add(endLockdownCommand);
+		UpdatePermsCommand updatePermsCommand = new UpdatePermsCommand(event);
+		//no new perms
+		commands.add(updatePermsCommand);
 		
 		//check message
 		if(lockdownCommand.check())
 			lockdownCommand.run();
 		else if(endLockdownCommand.check())
 			endLockdownCommand.run();
+		else if(updatePermsCommand.check())
+			updatePermsCommand.run();
 		
 		//help command
 		if(event.getMessage().getContentDisplay().equalsIgnoreCase(Driver.prefix.toString() + "help"))
