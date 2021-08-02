@@ -1,5 +1,7 @@
 package EventHandlers;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Bot.*;
@@ -10,9 +12,13 @@ import Interfaces.Command;
 
 public class GuildMessageReceived {
 
-	private static ArrayList<Command> commands = new ArrayList<Command>();
+	private ArrayList<Command> commands = new ArrayList<Command>();
+	
+	private GuildMessageReceivedEvent event;
 
 	public GuildMessageReceived(GuildMessageReceivedEvent event) {
+		this.event = event;
+		logMessage();
 		//Requirements: 
 		//MANAGE_ROLES permission
 		
@@ -29,8 +35,9 @@ public class GuildMessageReceived {
 		}
 		
 		//add all bot commands to commands list
+		//lockdown command
 		LockdownCommand lockdownCommand = new LockdownCommand(event);
-		//no knew perms
+		//no new perms
 		commands.add(lockdownCommand);
 		EndLockdownCommand endLockdownCommand = new EndLockdownCommand(event);
 		//no new perms
@@ -50,6 +57,13 @@ public class GuildMessageReceived {
 		//help command
 		if(event.getMessage().getContentDisplay().equalsIgnoreCase(Driver.prefix.toString() + "help"))
 			new HelpCommand(commands,event);
+	}
+	
+	private void logMessage() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		System.out.printf("[%s](%s,%s)%s: %s\n", dtf.format(LocalDateTime.now()),
+				event.getGuild().getName(),event.getChannel().getName(),
+				event.getMember().getEffectiveName(),event.getMessage().getContentDisplay());
 	}
 	
 }

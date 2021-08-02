@@ -50,8 +50,9 @@ public class LockdownCommand implements Interfaces.Command{
 			boolean skipRole = false;
 			//check if this is a lockdown role
 			for(Role j : lockdownRoles) {
-				if(i.equals(j)) {
-					skipRole = true;
+				if(j.equals(i)) {
+						skipRole=true;
+						break;
 				}
 			}
 			//if not a lockdown role
